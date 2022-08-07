@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./pages/Home";
+import MyCart from './pages/Cart'
+import {Route, Routes, useNavigate } from "react-router-dom";
+import Cart from "./pages/Cart";
+import ProductDetail from "./pages/ProductDetail";
 
+import { useEffect, useContext } from "react";
+import { UserContext } from "./context/UserContext";
 function App() {
+
+  let navigate = useNavigate();
+  const [state, dispatch] = useContext(UserContext)
+ 
+  useEffect(() => {
+    // pengalihan halaman jika login berhasil maka akan bernilai true dan akan dialihkan ke halaman utama
+    const checkAuth = () => {
+    if (state.isLogin === false) {
+       navigate('/')
+    }
+    
+};
+checkAuth();
+},[state])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/productDetail/:id' element={<ProductDetail/>}/>
+          <Route path='/myCart/' element={<MyCart/>}/>
+        </Routes>
   );
 }
 
