@@ -52,7 +52,7 @@ export default function Toping({item, index}){
         <>
             <Card style={{ width: '8rem', height:'8rem', marginRight:'37px',  borderStyle:'none'}} key={index}>
                 <Card.Img onClick={()=> addToping()} style={styles.image} variant="top" src={item.image} />
-                {show?<Card.Img on style={styles.tick} src={Tick}/>: null}
+                {show?<Card.Img style={styles.tick} src={Tick}/>: null}
                 <Card.Body style={styles.body}>
                     <Card.Title onClick={()=> addToping()} style={styles.title}>{item.name}</Card.Title>
                 </Card.Body>

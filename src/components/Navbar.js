@@ -3,7 +3,7 @@ import { useNavigate, Link} from 'react-router-dom'
 import { useState, useContext } from 'react';
 
 import Logo from '../assets/logo.png'
-import CartIn from  '../assets/cart.png'
+import Cart from  '../assets/cart.png'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from './RegisterForm';
 import Profile from '../assets/user.png'
@@ -11,6 +11,8 @@ import Logout from '../assets/logout.png'
 import Person from '../assets/maan.jpg'
 import TopingIcon from '../assets/TopingIcon.svg'
 import ProductIcon from '../assets/ProductIcon.svg'
+import CartIn from '../assets/CartInn.png'
+import CartOc from '../assets/cartOc.png'
 import { UserContext } from '../context/UserContext';
 
 
@@ -20,7 +22,6 @@ export default function NavbarList() {
     const [show2, setShow2] = useState(false);
     //const [state, dispatch] = useContext(UserContext)
     const [dropdown, setDropdown] = useState(false)
-    //const [status, setStatus] = useState('customer')
     const [state, dispatch] = useContext(UserContext)
     
     const navigate = useNavigate(   )
@@ -77,10 +78,13 @@ export default function NavbarList() {
             if(userStatus === 'user') {
                 return(
                     <Nav style={{display:'flex', width:'8%', marginTop:'15px', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                        {transactions? 
-                        <img onClick={imgClick} src={CartIn} style={{cursor:'pointer', width:'30px', height:'30px'}} alt="" />
+                        {state.user.cartStatus?
+                        <div>
+                            <img onClick={imgClick} src={Cart} style={{cursor:'pointer', width:'30px', height:'30px'}} alt="" />
+                            <img src={CartOc} style={{position:'absolute', marginTop:'2px', marginLeft:'-10px'}}/>
+                        </div>
                         :
-                        <img onClick={imgClick} src={CartIn} style={{cursor:'pointer', width:'30px', height:'30px'}} alt="" />
+                        <img onClick={imgClick} src={Cart} style={{cursor:'pointer', width:'30px', height:'30px'}} alt="" />
                         }
                         <Dropdown>
                             <Dropdown.Toggle style={{backgroundImage:`url(${Person})`, backgroundSize:'cover', backgroundPosition:'center', objectFit:'cover', backgroundColor:'black', borderStyle:'none', width:'50px', borderRadius:'60%', height:'50px' }} align="end">
@@ -134,6 +138,11 @@ export default function NavbarList() {
         }
     }
     
+    const handleHome = () => {
+        if(state.status === 'admin'){
+            return '/transaction'
+        } else return '/'
+    } 
     
     
     return (
@@ -141,7 +150,8 @@ export default function NavbarList() {
            <Navbar style={styles.navbarStyle}>
             {/* <Container style={{display:'flex', width:'100%', flexDirection:'row', justifyContent:'space-between',backgroundColor:"black", 
                     paddingLeft:'0rem', paddingRight:'0rem', alignItems:'center', }}> */}
-                <Link as={Link}style={{textDecoration:'none', marginTop:'1rem'}} to="/">
+                 {/* {state.status === 'admin'? <Link as={Link}style={{textDecoration:'none', marginTop:'1rem'}} to="/transaction"> :  <Link as={Link}style={{textDecoration:'none', marginTop:'1rem'}} to="/">} */}
+                 <Link as={Link}style={{textDecoration:'none', marginTop:'1rem'}} to={handleHome()}>
                     <Navbar.Brand  style={{textDecoration:'none'}}>
                         <img src={Logo} style={{weight:'60px', height:'60px'}} alt="" />
                     </Navbar.Brand>

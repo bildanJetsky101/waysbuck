@@ -12,8 +12,8 @@ import CartAlert from '../components/CartAlert';
 export default function ProductDetail (){
 
     const addCart = createContext()
-    const [state] = useContext(UserContext)
-
+    const [state, dispatch] = useContext(UserContext)
+    const [cart, setCart] = useState(false)
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
 
@@ -36,18 +36,34 @@ export default function ProductDetail (){
         if(state.isLogin === false){
             return setShow(true)
         }
+        setCart(true)
         setDataCart({
             id: product.id,
             title: product.title,
             topping: topping
         })
-        console.log(product.id)
+
+        const data ={
+            email:state.user.username,
+            password:state.user.password,
+            cartStatus:true
+        }
+
+        dispatch({
+            type: 'ADD_CART',
+            userStat: 'user',
+            payload: data
+
+          })
+        console.log(state)
     }
-    console.log(dataCart)
+    console.log(state.user.email)
+    console.log(state.status)
+    console.log(state.user.cartStatus)
 
     return(
         <div>
-            <NavbarList/>
+            <NavbarList />
             <CartAlert show={show} handleClose={handleClose}/>
             <div style={styles.container}>
                 <img style={styles.image} src={product.image} alt="" />

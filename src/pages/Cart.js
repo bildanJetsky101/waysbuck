@@ -4,14 +4,29 @@ import Toping from '../dataToping/toping'
 import NavbarList from '../components/Navbar'
 import Payment from '../components/Payment'
 import { useState } from 'react'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 export default function Cart(){
 
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false);
+    const [state, dispatch] = useContext(UserContext)
 
     const payProduct = () => {
         setShow(true)
+
+        const data ={
+            email:state.user.username,
+            password:state.user.password,
+            cartStatus:false
+        }
+
+        dispatch({
+            type: 'ADD_PAY',
+            userStat: 'user',
+            payload: data
+          })
     }
 
     const deleteProduct = () => {

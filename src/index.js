@@ -14,7 +14,7 @@ root.render(
       <UserContextProvider>
         <QueryClientProvider client={client}>
           <Router>
-            <App />
+            <App style={{fontFamily:'Avenir'}}/>
           </Router>
         </QueryClientProvider>
       </UserContextProvider>

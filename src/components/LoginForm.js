@@ -21,6 +21,7 @@ export default function LoginForm({show, setStatus, handleClose}){
     const [data, setData] = useState({
         email: '',
         password: '',
+        cartStatus:false
       });
 
 
@@ -56,7 +57,8 @@ export default function LoginForm({show, setStatus, handleClose}){
             if(a) {
               setData({
                 email:'',
-                password:''
+                password:'',
+                cartStatus:false
               })
               alert('error')
               throw new Error

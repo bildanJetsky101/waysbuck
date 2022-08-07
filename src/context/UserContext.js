@@ -18,6 +18,18 @@ const reducer = (state, action) => {
                 status:userStat,
                 user: payload
             }
+        case 'ADD_CART':
+            return{
+                isLogin: true,
+                status:userStat,
+                user: payload
+            }
+        case 'ADD_PAY':
+            return{
+                isLogin: true,
+                status:userStat,
+                user: payload
+            }
         case 'LOGOUT':
             return {
                 isLogin: false,
